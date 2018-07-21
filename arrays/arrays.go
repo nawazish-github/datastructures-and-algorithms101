@@ -9,6 +9,7 @@ type DynamicArrays struct {
 	Data     []interface{} //Data is the underlying storage for the DynamicArray
 }
 
+//NewArray returns a new DynamicArray initialized to its default values
 func NewArray() *DynamicArrays {
 	return &DynamicArrays{
 		Size:     0,
@@ -21,20 +22,24 @@ func NewArray() *DynamicArrays {
 //If there is not enough space to add, it grows itself.
 func (d *DynamicArrays) Add(elem interface{}) {
 	if d.Size == d.Capacity {
-		d.Size = 0
-		newCap := d.Capacity * 2
-		tempData := make([]interface{}, newCap)
-		for idx, val := range d.Data {
-			tempData[idx] = val
-			d.Size = d.Size + 1
-		}
-		d.Capacity = newCap
-		d.Data = tempData
+		enlargeArray(d)
 		d.Data[d.Size] = elem
-		d.Size = d.Size + 1
+		d.Size++
 		return
 	}
 
 	d.Data[d.Size] = elem
-	d.Size = d.Size + 1
+	d.Size++
+}
+
+func enlargeArray(d *DynamicArrays) {
+	d.Size = 0
+	newCap := d.Capacity * 2
+	tempData := make([]interface{}, newCap)
+	for idx, val := range d.Data {
+		tempData[idx] = val
+		d.Size++
+	}
+	d.Capacity = newCap
+	d.Data = tempData
 }
