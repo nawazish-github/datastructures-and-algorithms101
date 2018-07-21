@@ -1,5 +1,9 @@
 package arrays
 
+import (
+	"errors"
+)
+
 const initCap = 10
 
 //DynamicArrays represents an elastic array
@@ -42,4 +46,33 @@ func enlargeArray(d *DynamicArrays) {
 	}
 	d.Capacity = newCap
 	d.Data = tempData
+}
+
+//Insert inserts given element at the given index
+func (d *DynamicArrays) Insert(elem interface{}, idx int) {
+	switch {
+	//check if index is empty or occupied
+	case idx < d.Size && d.Size < d.Capacity:
+		shiftAndPutElement(d, idx, elem)
+	//check whether there is any space for insertion
+	case idx < d.Size && d.Size == d.Capacity:
+		enlargeArray(d)
+		//make space by shifting
+		shiftAndPutElement(d, idx, elem)
+	//check whether space is available and index is not occupied
+	case idx >= d.Size && d.Size < d.Capacity && idx < d.Capacity:
+		d.Data[idx] = elem
+		d.Size++
+	default:
+		panic(errors.New("Cannot insert beyond the capacity of array"))
+	}
+
+}
+
+func shiftAndPutElement(d *DynamicArrays, idx int, elem interface{}) {
+	for i := d.Size - 1; i >= idx; i-- {
+		d.Data[i+1] = d.Data[i]
+	}
+	d.Data[idx] = elem
+	d.Size++
 }
