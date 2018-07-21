@@ -13,7 +13,6 @@ func TestAddMethodToAddElementWhenSpaceIsAvailable(t *testing.T) {
 }
 
 func TestAddMethodToAddElementWhenThereIsNotEnoughSpaceAvailable(t *testing.T) {
-
 	da := NewArray()
 
 	for i := 1; i <= 10; i++ {
@@ -22,15 +21,14 @@ func TestAddMethodToAddElementWhenThereIsNotEnoughSpaceAvailable(t *testing.T) {
 
 	da.Add(11)
 	da.Add(12)
+
 	if da.Size != 12 {
 		t.Errorf("Size of Dynamic Array is not 1")
 	}
 	if da.Data[10] != 11 {
 		t.Errorf("11 was not found at index 10")
 	}
-
 	if da.Data[11] != 12 {
 		t.Errorf("11 was not found at index 10")
 	}
-
 }
