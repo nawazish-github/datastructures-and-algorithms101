@@ -43,5 +43,6 @@ func (q *Queue) Dequeue() int {
 func newNode(elem int) Node {
 	return Node{
 		Data: elem,
+		Next: nil,
 	}
 }
