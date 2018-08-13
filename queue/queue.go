@@ -1,5 +1,7 @@
 package queue
 
+import "fmt"
+
 type Node struct {
 	Data int
 	Next *Node
