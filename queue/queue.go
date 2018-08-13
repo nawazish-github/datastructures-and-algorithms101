@@ -1,5 +1,7 @@
 package queue
 
+import "fmt"
+
 type Node struct {
 	Data int
 	Next *Node
@@ -41,6 +43,7 @@ func (q *Queue) Dequeue() int {
 }
 
 func newNode(elem int) Node {
+	fmt.Println("Creating a new Node")
 	return Node{
 		Data: elem,
 		Next: nil,
