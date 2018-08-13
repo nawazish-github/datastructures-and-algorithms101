@@ -76,3 +76,28 @@ func shiftAndPutElement(d *DynamicArrays, idx int, elem interface{}) {
 	d.Data[idx] = elem
 	d.Size++
 }
+
+//RotateClockwise rotates the internal array clockwise n times
+func (d *DynamicArrays) RotateClockwise(n int) {
+	currIdx := len(d.Data) - 1
+	for i := 1; i <= n; i++ {
+		val := d.Data[currIdx].(int)
+		enqueue(val)
+		d.Data[currIdx] = d.Data[0]
+		for currIdx > 0 {
+
+		}
+	}
+}
+
+var temp = make([]int, 2)
+
+func enqueue(num int) {
+	temp = append(temp, num)
+}
+
+func dequeue() int {
+	t := temp[0]
+	temp[0] = temp[1]
+	return t
+}
