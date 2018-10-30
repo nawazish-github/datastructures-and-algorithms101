@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 var val [6]int
 var wt [6]int
@@ -20,8 +22,8 @@ func main() {
 
 		for j := 1; j <= C; j++ { //columns
 			if currWeight == j {
-				maxVal := max(currValue+recurr(i-1, j-i), mat[i-1][j])
-				mat[i][j] = maxVal
+				optVal := max(currValue+recurr(i-1, j-i), mat[i-1][j])
+				mat[i][j] = optVal
 				continue
 			}
 
@@ -38,7 +40,7 @@ func main() {
 		}
 	}
 
-	fmt.Println("Max value in the knapsack: ", mat[6][10])
+	fmt.Println("Max value in the knapsack: ", mat[len(wt)][C])
 }
 
 func recurr(prevRow, prevCol int) int {
