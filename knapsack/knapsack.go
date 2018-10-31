@@ -21,19 +21,11 @@ func main() {
 		currValue := val[i-1]
 
 		for j := 1; j <= C; j++ { //columns
-			if currWeight == j {
+			if currWeight <= j {
 				optVal := max(currValue+recurr(i-1, j-i), mat[i-1][j])
 				mat[i][j] = optVal
 				continue
-			}
-
-			if currWeight < j {
-				optVal := max(currValue+recurr(i-1, j-currWeight), mat[i-1][j])
-				mat[i][j] = optVal
-				continue
-			}
-
-			if currWeight > j {
+			} else {
 				optVal := mat[i-1][j]
 				mat[i][j] = optVal
 			}
